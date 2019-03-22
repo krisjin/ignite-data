@@ -37,7 +37,7 @@ public class ThinClientExample {
 
             System.out.println("压缩前大小:" + rawData.getBytes().length);
 
-            byte[] val2 = messagePack.write(rawData);
+            byte[] val2 = messagePack.write(data);
             System.out.println("压缩后大小:" + val2.length);
 
             //存数据
@@ -49,7 +49,7 @@ public class ThinClientExample {
             List<InventoryForecastSkuModel> value = messagePack.read(retVal, Templates.tList(messagePack.lookup(InventoryForecastSkuModel.class)));
 
 
-            System.out.format(">>> Loaded [%s] from the xxxcache.\n", value);
+            System.out.println("load data: \n" + JSONObject.toJSONString(value));
         } catch (ClientException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class ThinClientExample {
         List<InventoryForecastSkuModel> skuList = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
             InventoryForecastSkuModel skuModel = new InventoryForecastSkuModel();
-            skuModel.setDcId("10000" + i);
+            skuModel.setDcId("1000" + i);
             skuModel.setSkuName("0123456789abcde");
             skuModel.setDcId("10001");
             skuList.add(skuModel);
