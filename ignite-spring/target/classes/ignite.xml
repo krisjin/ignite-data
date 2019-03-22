@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 集群基础设置 -->
+    <bean class="org.apache.ignite.configuration.IgniteConfiguration">
+
+        <!-- 是否客户端模式 -->
+        <property name="clientMode" value="false"></property>
+        <!-- 对等类加载器 -->
+        <property name="peerClassLoadingEnabled" value="true"/>
+
+        <!-- 发现方式 -->
+        <property name="discoverySpi">
+        <bean class="org.apache.ignite.spi.discovery.zk.ZookeeperDiscoverySpi">
+        <property name="zkConnectionString" value="${ignite.zookeeper.conn}"/>
+        <property name="sessionTimeout" value="60000"/>
+        <property name="zkRootPath" value="${ignite.zookeeper.path}"/>
+        <property name="joinTimeout" value="30000"/>
+        </bean>
+        </property>
+
+        <property name="communicationSpi">
+            <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
+                <property name="reconnectCount" value="5"></property>
+                <property name="socketWriteTimeout" value="5000"></property>
+                <property name="usePairedConnections" value="true"></property>
+            </bean>
+
+        </property>
+
+
+        <property name="systemThreadPoolSize" value="4"></property>
+        <property name="publicThreadPoolSize" value="4"></property>
+        <property name="queryThreadPoolSize" value="4"></property>
+        <property name="serviceThreadPoolSize" value="4"></property>
+        <property name="stripedPoolSize" value="4"></property>
+        <property name="managementThreadPoolSize" value="4"></property>
+        <property name="dataStreamerThreadPoolSize" value="20"></property>
+
+
+        <!-- 节点内存与页大小设置 -->
+
+        <property name="dataStorageConfiguration">
+            <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+
+                <property name="metricsEnabled" value="true"></property>
+                <!-- 页大小为 8 * 1024 -->
+                <property name="pageSize" value="8192"/>
+
+                <!-- region设置 -->
+                <property name="defaultDataRegionConfiguration">
+                    <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+
+                        <property name="name" value="Default_Region"/>
+                        <property name="metricsEnabled" value="true"></property>
+                        <!-- 内存大小设置为12G. -->
+                        <property name="maxSize" value="#{1L * 1024 * 1024 * 1024}"/>
+                        <property name="initialSize" value="#{1L * 1024 * 1024 * 1024}"/>
+                    </bean>
+                </property>
+
+            </bean>
+        </property>
+
+        <!-- LOGGER. -->
+        <property name="gridLogger">
+            <bean class="org.apache.ignite.logger.slf4j.Slf4jLogger"/>
+        </property>
+    </bean>
+
+</beans>
