@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 import javax.annotation.Resource;
 
 /**
- * User:shijingui
+ * User:krisjin
  * Date:2019/3/11
  */
 @SpringBootApplication
