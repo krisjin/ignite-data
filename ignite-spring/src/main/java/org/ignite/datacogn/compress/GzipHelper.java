@@ -1,4 +1,4 @@
-package org.ignite.datacogn;
+package org.ignite.datacogn.compress;
 
 import com.alibaba.fastjson.JSONObject;
 import org.ignite.datacogn.model.InventoryForecastSku;
