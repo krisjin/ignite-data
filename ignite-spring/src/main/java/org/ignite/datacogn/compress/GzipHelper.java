@@ -62,7 +62,7 @@ public class GzipHelper {
         byte[] retData = ungzip(gzipData);
         System.out.println("解压缩耗时:" + (System.currentTimeMillis() - st) + "ms");
         String newData = new String(retData);
-        System.out.println("--------uncompress data:---------\n" + newData);
+//        System.out.println("--------uncompress data:---------\n" + newData);
 
     }
 }

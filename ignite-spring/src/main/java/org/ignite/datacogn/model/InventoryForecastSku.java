@@ -43,7 +43,7 @@ public class InventoryForecastSku {
 
     public static List<InventoryForecastSku> getTestData() {
         List<InventoryForecastSku> skuList = new ArrayList<>();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1000000; i++) {
             InventoryForecastSku skuModel = new InventoryForecastSku();
             skuModel.setDcId("1000" + i);
             skuModel.setSkuName("0123456789abcde");
