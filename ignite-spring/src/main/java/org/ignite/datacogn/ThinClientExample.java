@@ -11,7 +11,6 @@ import org.ignite.datacogn.model.InventoryForecastSku;
 import org.msgpack.MessagePack;
 import org.msgpack.template.Templates;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,7 +29,7 @@ public class ThinClientExample {
 
             Integer key = 100;
 
-            List<InventoryForecastSku> data = getData();
+            List<InventoryForecastSku> data = InventoryForecastSku.getTestData();
 
 
             String rawData = JSONObject.toJSONString(data);
@@ -58,15 +57,15 @@ public class ThinClientExample {
     }
 
 
-    private static List<InventoryForecastSku> getData() {
-        List<InventoryForecastSku> skuList = new ArrayList<>();
-        for (int i = 0; i < 10000; i++) {
-            InventoryForecastSku skuModel = new InventoryForecastSku();
-            skuModel.setDcId("1000" + i);
-            skuModel.setSkuName("0123456789abcde");
-            skuModel.setDcId("10001");
-            skuList.add(skuModel);
-        }
-        return skuList;
-    }
+
+
+
+
+
+
+
+
+
+
+
 }

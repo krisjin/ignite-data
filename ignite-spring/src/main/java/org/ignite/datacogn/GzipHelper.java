@@ -51,13 +51,16 @@ public class GzipHelper {
 
         System.out.println("before size:" + str.getBytes().length);
 
+        long st = System.currentTimeMillis();
         byte[] gzipData = gzip(str.getBytes());
 
+        System.out.println("压缩耗时:" + (System.currentTimeMillis() - st) + "ms");
+        st = System.currentTimeMillis();
         System.out.println("after size:" + gzipData.length);
 
 
         byte[] retData = ungzip(gzipData);
-
+        System.out.println("解压缩耗时:" + (System.currentTimeMillis() - st) + "ms");
         String newData = new String(retData);
         System.out.println("--------uncompress data:---------\n" + newData);
 
