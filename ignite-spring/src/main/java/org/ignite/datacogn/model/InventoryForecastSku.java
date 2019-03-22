@@ -2,12 +2,15 @@ package org.ignite.datacogn.model;
 
 import org.msgpack.annotation.Message;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User:krisjin
  * Date:2019/3/22
  */
 @Message
-public class InventoryForecastSkuModel {
+public class InventoryForecastSku {
 
     private String skuId;
     private String skuName;
@@ -36,4 +39,19 @@ public class InventoryForecastSkuModel {
     public void setDcId(String dcId) {
         this.dcId = dcId;
     }
+
+
+    public static List<InventoryForecastSku> getTestData() {
+        List<InventoryForecastSku> skuList = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            InventoryForecastSku skuModel = new InventoryForecastSku();
+            skuModel.setDcId("1000" + i);
+            skuModel.setSkuName("0123456789abcde");
+            skuModel.setDcId("10001");
+            skuList.add(skuModel);
+        }
+        return skuList;
+
+    }
+
 }

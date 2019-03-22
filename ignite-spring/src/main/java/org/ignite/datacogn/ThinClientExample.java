@@ -7,7 +7,7 @@ import org.apache.ignite.client.ClientCache;
 import org.apache.ignite.client.ClientException;
 import org.apache.ignite.client.IgniteClient;
 import org.apache.ignite.configuration.ClientConfiguration;
-import org.ignite.datacogn.model.InventoryForecastSkuModel;
+import org.ignite.datacogn.model.InventoryForecastSku;
 import org.msgpack.MessagePack;
 import org.msgpack.template.Templates;
 
@@ -30,7 +30,7 @@ public class ThinClientExample {
 
             Integer key = 100;
 
-            List<InventoryForecastSkuModel> data = getData();
+            List<InventoryForecastSku> data = getData();
 
 
             String rawData = JSONObject.toJSONString(data);
@@ -46,7 +46,7 @@ public class ThinClientExample {
             //取数据
             byte[] retVal = (byte[]) cache.get(key);
 
-            List<InventoryForecastSkuModel> value = messagePack.read(retVal, Templates.tList(messagePack.lookup(InventoryForecastSkuModel.class)));
+            List<InventoryForecastSku> value = messagePack.read(retVal, Templates.tList(messagePack.lookup(InventoryForecastSku.class)));
 
 
             System.out.println("load data: \n" + JSONObject.toJSONString(value));
@@ -58,10 +58,10 @@ public class ThinClientExample {
     }
 
 
-    private static List<InventoryForecastSkuModel> getData() {
-        List<InventoryForecastSkuModel> skuList = new ArrayList<>();
+    private static List<InventoryForecastSku> getData() {
+        List<InventoryForecastSku> skuList = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
-            InventoryForecastSkuModel skuModel = new InventoryForecastSkuModel();
+            InventoryForecastSku skuModel = new InventoryForecastSku();
             skuModel.setDcId("1000" + i);
             skuModel.setSkuName("0123456789abcde");
             skuModel.setDcId("10001");
